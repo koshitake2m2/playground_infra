@@ -1,0 +1,3 @@
+- localstack
+  - [Overview | Docs](https://docs.localstack.cloud/overview/)
+  - [LocalStackを使ってローカル環境でS3を立ち上げ、Lambdaでファイルをアップロードしてみた - Qiita](https://qiita.com/yasomaru/items/fa708a1f21a79e637868)
