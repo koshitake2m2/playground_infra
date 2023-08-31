@@ -26,7 +26,7 @@ localstack start
 ## terraform
 
 ```bash
-## 1. IAM Identity Center(SSO)で認証する. defaultでは8hでセッションが切れる.
+# 1. IAM Identity Center(SSO)で認証する. defaultでは8hでセッションが切れる.
 aws configure sso
 # SSO session name : XXXX # 任意の名前
 # SSO start URL [None]: https://XXXX.awsapps.com/start # IAM Identity CenterのSettings summaryに記載してある
@@ -43,7 +43,7 @@ aws sts get-caller-identity --profile XXXX --no-cli-pager
 #     "Arn": "XXXX"
 # }
 
-## 2. STS short-term credentialsを取得する
+# 2. STS short-term credentialsを取得する
 cat ~/.aws/sso/cache/*.json | jq
 
 # accessTokenがある方を利用する
@@ -63,13 +63,13 @@ aws sso get-role-credentials \
 #     }
 # }
 
-## 3. terraform用に環境変数にcredentialsを設定する
+# 3. terraform用に環境変数にcredentialsを設定する
 
 export AWS_ACCESS_KEY_ID="XXXX"
 export AWS_SECRET_ACCESS_KEY="XXXX"
 export AWS_SESSION_TOKEN="XXXX"
 
-## 4. terraformを実行する
+# 4. terraformを実行する
 cd terraform/XXXX # main.tfがあるところへ
 terraform init
 terraform plan
