@@ -23,7 +23,7 @@ localstack logs
 localstack start
 ```
 
-## terraform
+## aws
 
 ```bash
 # 0. ブラウザの方で該当のロールでIAM Identity Center(SSO)にログインしておく. 
@@ -93,4 +93,21 @@ terraform init
 terraform plan
 terraform apply --auto-approve
 terraform destroy --auto-approve
+```
+
+## firebase
+
+```bash
+# 認証
+gcloud auth login
+
+# カレントプロジェクトのactivate
+gcloud config configurations activate XXXX
+gcloud config configurations list
+
+# terraform用に環境変数を読み込む
+cd terraform/XXXX
+source .env
+
+
 ```
