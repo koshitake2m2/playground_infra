@@ -9,3 +9,7 @@ localstack/volume
 *.tfstate
 terraform.tfvars
 .terraform.lock.hcl
+
+# google cloud
+client_secrets.json
+service.json

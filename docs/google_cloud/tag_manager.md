@@ -1,0 +1,1 @@
+- [Google Tag Manager API - 概要 | Google Tag Manager REST API | Google for Developers](https://developers.google.com/tag-platform/tag-manager/api/v2?hl=ja)

@@ -1,0 +1,5 @@
+- [Amazon DynamoDB におけるシングルテーブル vs マルチテーブル設計 | Amazon Web Services ブログ](https://aws.amazon.com/jp/blogs/news/single-table-vs-multi-table-design-in-amazon-dynamodb/)
+  - パーティショニングは水平スケーリング(冗長化)を容易にする
+  - シングルテーブルのメリット
+    - RDBMSにおける複数テーブルのjoinのようなことがしやすい。パーティショニングを利用すれば
+    - コスト削減

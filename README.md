@@ -23,13 +23,27 @@ localstack logs
 localstack start
 ```
 
+## terraform
+
+```bash
+tfenv list-remote
+tfenv install 1.5.7
+tfenv list
+tfenv use 1.5.7
+```
+
 ## aws
 
 ```bash
 # 0. ブラウザの方で該当のロールでIAM Identity Center(SSO)にログインしておく. 
 
 # 1. IAM Identity Center(SSO)で認証する. defaultでは8hでセッションが切れる.
-aws configure sso
+session_name=XXXX
+start_url=https://XXXX.awsapps.com/start
+account_id=XXXX
+role_name=XXXX
+profile=XXXX
+aws configure sso < <(echo $session_name; echo $start_url; echo ap-northeast-1; echo; echo; echo;)
 # SSO session name : XXXX # 任意の名前
 # SSO start URL [None]: https://XXXX.awsapps.com/start # IAM Identity CenterのSettings summaryに記載してある
 # SSO region [None]: ap-northeast-1
@@ -38,7 +52,7 @@ aws configure sso
 # CLI default client Region [ap-northeast-1]:
 # CLI default output format: json
 
-aws sts get-caller-identity --profile XXXX --no-cli-pager
+aws sts get-caller-identity --profile $profile --no-cli-pager
 # {
 #     "UserId": "XXXX",
 #     "Account": "XXXX",
@@ -54,8 +68,6 @@ done;
 
 # 2つのjsonのうちaccessTokenがある方のaccessTokenを利用する
 tmp_file=$(mktemp)
-account_id=XXXX
-role_name=XXXX
 aws sso get-role-credentials \
   --account-id $account_id \
   --role-name $role_name \
@@ -79,13 +91,13 @@ export AWS_SESSION_TOKEN=$(cat $tmp_file | jq -r ".roleCredentials.sessionToken"
 rm -f $tmp_file 
 
 rm -f ~/.aws/credentials
-cat <<-EOF >> ~/.aws/credentials
+cat <<-EOF > ~/.aws/credentials
 [${account_id}_${role_name}]
 aws_access_key_id=$AWS_ACCESS_KEY_ID
 aws_secret_access_key=$AWS_SECRET_ACCESS_KEY
 aws_session_token=$AWS_SESSION_TOKEN
 EOF
-vim ~/.aws/credentials
+# vim ~/.aws/credentials
 
 # 4. terraformを実行する
 cd terraform/XXXX # main.tfがあるところへ
