@@ -1,6 +1,6 @@
 #!/bin/zsh
 # サブシェルではなくカレントシェルで実行してください.
-# e.g. source ~/koshitake2m2/playground_infra/login_aws.sh
+# e.g. source ~/koshitake2m2/playground_infra/login_aws.zsh
 
 # 0. 環境変数の適用
 echo "$(dirname $0)/.env"
