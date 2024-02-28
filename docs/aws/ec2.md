@@ -1,1 +1,2 @@
 - [EC2 amazon linux2 root にスイッチする方法を検証してみた #AWS - Qiita](https://qiita.com/gama1234/items/23b8397d66a890771866)
+- [NAT ゲートウェイを使わずにプライベートサブネットをインターネットにつなぐ #AWS - Qiita](https://qiita.com/SSMU3/items/5ed5792e74266b54ff8b)
