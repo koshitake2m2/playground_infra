@@ -2,6 +2,8 @@
 # サブシェルではなくカレントシェルで実行してください.
 # e.g. source ~/koshitake2m2/playground_infra/login_aws.zsh
 
+# 0. ブラウザの方で該当のロールでIAM Identity Center(SSO)にログインしておく. 
+
 # 0. 環境変数の適用
 echo "$(dirname $0)/.env"
 echo

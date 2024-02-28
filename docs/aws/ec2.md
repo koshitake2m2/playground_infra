@@ -1,0 +1,1 @@
+- [EC2 amazon linux2 root にスイッチする方法を検証してみた #AWS - Qiita](https://qiita.com/gama1234/items/23b8397d66a890771866)

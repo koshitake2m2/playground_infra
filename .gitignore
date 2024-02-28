@@ -13,3 +13,6 @@ terraform.tfvars
 # google cloud
 client_secrets.json
 service.json
+
+**/ssh_keys/*
+!**/ssh_keys/.keep
