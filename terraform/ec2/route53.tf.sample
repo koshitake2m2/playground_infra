@@ -1,0 +1,12 @@
+# イメージこんな感じ. 動作確認はしていない
+resource "aws_route53_zone" "main" {
+  name = var.my_domain
+}
+
+resource "aws_route53_record" "www" {
+  zone_id = aws_route53_zone.main.zone_id
+  name    = "www"
+  type    = "A"
+  ttl     = 300
+  records = [aws_eip.api_server_ip.public_ip]
+}

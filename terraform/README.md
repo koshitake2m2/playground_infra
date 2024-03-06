@@ -6,7 +6,14 @@
 - vpc 内に ec2 がある
 - ssh で接続可能
 
-TODO: ドメインを設定してみよう
+```bash
+sudo su -
+curl https://get.volta.sh | bash
+exec $SHELL -l
+volta install node
+npm i -g http-server
+http-server -p 8080
+```
 
 ## ec2-rds
 
