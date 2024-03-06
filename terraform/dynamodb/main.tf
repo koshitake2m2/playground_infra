@@ -19,7 +19,7 @@ provider "aws" {
 # }
 
 # resource "aws_cognito_user_pool" "user-pool" {
-#   name = "pocket-money-record-book-dev-user-pool"
+#   name = "xxx-dev-user-pool"
 #   auto_verified_attributes = [
 #     "email",
 #   ]
@@ -28,8 +28,8 @@ provider "aws" {
 
 // https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dynamodb_table
 resource "aws_dynamodb_table" "main" {
-  name           = "pocket-money-record-book-dev-user-table"
-  hash_key       = "id"
+  name     = "xxx-dev-user-table"
+  hash_key = "id"
   attribute {
     name = "id"
     type = "S"
