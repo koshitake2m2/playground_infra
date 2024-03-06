@@ -33,15 +33,22 @@ DB_HOSTNAME=terraform-xxxxxxxxxxxxxxxxxxxxxxx.yyyyyyyyyy.ap-northeast-1.rds.amaz
 psql -d $DB_NAME -h $DB_HOSTNAME -U $DB_USERNAME
 ```
 
-## ec2 + elb
+## ec2-elb
 
-TODO
+- public subnet に ec2 が 2 つ
+- alb
+- alb の DNS 名を route53 とか外部の DNS で設定すると、いい感じにロードバランスできる
+
+```bash
+# user_dataの結果がわかる
+sudo cat /var/log/cloud-init-output.log
+```
 
 ## sqs-scheduler
 
 - EventBridge Scheduler が定期的に SQS にメッセージを送信する
 - 定期バッチの起動に活用できる
 
-```
+```bash
 
 ```
