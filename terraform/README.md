@@ -36,8 +36,11 @@ psql -d $DB_NAME -h $DB_HOSTNAME -U $DB_USERNAME
 ## ec2-elb
 
 - public subnet に ec2 が 2 つ
-- alb
-- alb の DNS 名を route53 とか外部の DNS で設定すると、いい感じにロードバランスできる
+- nlb が IP アドレスを持つ
+- nlb が alb へ
+- alb が ec2 へ
+- nlb や alb の DNS 名を route53 とか外部の DNS で設定すると、いい感じにロードバランスできる
+  - もしくは vpc endpoint で 他の vpc の ec2 からアクセスできる
 
 ```bash
 # user_dataの結果がわかる

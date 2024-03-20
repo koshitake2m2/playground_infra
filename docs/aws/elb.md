@@ -1,0 +1,1 @@
+- [\[新機能\]静的な IP を持つロードバランサー Network Load Balancer（NLB）が発表されました！ | DevelopersIO](https://dev.classmethod.jp/articles/elb-network-load-balancer-static-ip-adress/)
