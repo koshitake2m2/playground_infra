@@ -53,5 +53,3 @@ resource "aws_lb_target_group_attachment" "nlb_target_group_attachment_alb" {
   target_id        = aws_lb.alb.id
   port             = 80
 }
-
-

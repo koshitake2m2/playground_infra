@@ -68,22 +68,6 @@ resource "aws_internet_gateway" "main" {
 }
 
 // https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eip
-# resource "aws_eip" "public_1a" {
-#   vpc = true
-
-#   tags = {
-#     Name = "public_1a"
-#   }
-# }
-
-# resource "aws_eip" "public_1c" {
-#   vpc = true
-
-#   tags = {
-#     Name = "public_1c"
-#   }
-# }
-
 resource "aws_eip" "api_server_1a_ip" {
   vpc      = true
   instance = aws_instance.app_server_1a.id
