@@ -15,71 +15,44 @@ provider "aws" {
 
 // ref: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/sqs_queue
 resource "aws_sqs_queue" "my_queue" {
-  name                      = "my-queue"
+  name                      = "my-queue.fifo"
   delay_seconds             = 90
   max_message_size          = 2048
   message_retention_seconds = 86400
   receive_wait_time_seconds = 10
+  // FIFOキューは, 1回だけの処理と重複排除機能を備えている.
+  // - 複数のconsumerがいる場合, 通常のキューでは同じメッセージが複数回処理される可能性があるが, FIFOキューでは1回だけ処理される.
+  // - [Amazon Simple Queue Service の新機能 – 1 回だけの処理と重複排除機能を備えた FIFO キュー | Amazon Web Services ブログ](https://aws.amazon.com/jp/blogs/news/new-for-amazon-simple-queue-service-fifo-queues-with-exactly-once-delivery-deduplication/)
+  fifo_queue = true
+  // EventBridge Schedulerはat-least-onceである. 定期バッチを複数実行しないようにメッセージの重複削除をしている
+  // - 5分間の重複排除を行う
+  // - [Amazon EventBridge スケジューラとは - EventBridge スケジューラ](https://docs.aws.amazon.com/ja_jp/scheduler/latest/UserGuide/what-is-scheduler.html)
+  // - [Amazon Simple Queue Service の新機能 – 1 回だけの処理と重複排除機能を備えた FIFO キュー | Amazon Web Services ブログ](https://aws.amazon.com/jp/blogs/news/new-for-amazon-simple-queue-service-fifo-queues-with-exactly-once-delivery-deduplication/)
+  // - [Amazon SQSメッセージ重複排除ID の使用 - Amazon Simple Queue Service](https://docs.aws.amazon.com/ja_jp/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagededuplicationid-property.html)
+  content_based_deduplication = true
+  // consumerの処理時間よりも長くするべき. 処理時間より短いとmaxReceiveCountの分、メッセージをreceive(consumeと同義)しようとする.
+  visibility_timeout_seconds = 60
+  redrive_policy = jsonencode(
+    {
+      deadLetterTargetArn = aws_sqs_queue.my_queue_dlq.arn
+      // 処理途中でエラーになることによるリトライを避けたい場合は, 一度しか実行されないようにmaxReceiveCount = 1にする. 
+      // ただし, 理想はべき等な処理にするべき & maxReceiveCountは1以上にするべき
+      // https://docs.aws.amazon.com/ja_jp/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html#sqs-dead-letter-queues-how-they-work
+      //
+      // maxReceiveCount = 1にしていい理由
+      // - consumerがエラーが起きない処理ならば, エラーはAWS側のネットワークなど外部要因によるため滅多に発生しないはず.
+      maxReceiveCount = 1
+    }
+  )
 }
 
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role
-resource "aws_iam_role" "my_scheduler_role" {
-  name = "my-scheduler-role"
-  inline_policy {
-    name = "my-scheduler-role-policy"
-    policy = jsonencode({
-      Version = "2012-10-17"
-      Statement = [
-        {
-          Action = "sqs:SendMessage"
-          Effect = "Allow"
-          Resource = [
-            aws_sqs_queue.my_queue.arn
-          ]
-        }
-      ]
-    })
-  }
-  assume_role_policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Action = "sts:AssumeRole"
-        Effect = "Allow"
-        Principal = {
-          Service = "scheduler.amazonaws.com"
-        }
-      },
-    ]
-  })
-}
-
-# ref: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/scheduler_schedule
-resource "aws_scheduler_schedule" "my_scheduler" {
-  name       = "my-schedule"
-  group_name = "default"
-
-  flexible_time_window {
-    mode = "OFF"
-  }
-
-  # ref: https://docs.aws.amazon.com/scheduler/latest/UserGuide/schedule-types.html
-  schedule_expression_timezone = "Asia/Tokyo"
-  # schedule_expression = "rate(1 hours)"
-  schedule_expression = "cron(0/5 * * * ? *)"
-
-  target {
-    # arn = "arn:aws:scheduler:::aws-sdk:sqs:sendMessage"
-
-    arn      = aws_sqs_queue.my_queue.arn
-    role_arn = aws_iam_role.my_scheduler_role.arn
-
-    input = jsonencode({
-      # MessageBody = "{ \"hello\": \"world\"}"
-      MessageBody = jsonencode({
-        hello = "world"
-      })
-      QueueUrl = aws_sqs_queue.my_queue.url
-    })
-  }
+resource "aws_sqs_queue" "my_queue_dlq" {
+  name                      = "my-queue-dlq.fifo"
+  delay_seconds             = 90
+  max_message_size          = 2048
+  message_retention_seconds = 86400
+  receive_wait_time_seconds = 10
+  fifo_queue = true
+  content_based_deduplication = true
+  visibility_timeout_seconds = 60
 }
