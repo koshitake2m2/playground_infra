@@ -8,10 +8,10 @@ resource "aws_lb" "alb" {
   subnets         = [aws_subnet.public_1a.id, aws_subnet.public_1c.id]
   ip_address_type = "ipv4"
 
-  # access_logs {
-  #   enabled = true
-  #   bucket = "alb-access-log-bucket"
-  # }
+  access_logs {
+    enabled = true
+    bucket  = aws_s3_bucket.alb_access_log.bucket
+  }
 
   tags = {
     Name = "alb"

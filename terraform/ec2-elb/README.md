@@ -4,6 +4,9 @@
 - nlb が IP アドレスを持つ
 - nlb が alb へ
 - alb が ec2 へ
+  - waf でアクセス制限
+    - `/deny` を弾く. 403になる
+- albのアクセスログをs3に保存
 - alb, nlb の DNS 名にブラウザでアクセスすれば ec2 にアクセスできる
   - alb の DNS 名: http://alb-XXXXXXXXXX.ap-northeast-1.elb.amazonaws.com/
   - nlb の DNS 名: http://nlb-XXXXXXXXXXXXXXXX.elb.ap-northeast-1.amazonaws.com/
@@ -17,5 +20,6 @@ sudo cat /var/log/cloud-init-output.log
 
 ### 注意点
 
-- terraform destroy で aws_internet_gateway.main は 16 分くらいかかる場合がある
+- terraform destroy で aws_internet_gateway.main は 20 分くらいかかる場合がある
+- s3のバケットは空でないと削除できないので手動でオブジェクトを削除する
 - うまく destroy できない場合は手動で削除する

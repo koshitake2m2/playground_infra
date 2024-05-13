@@ -52,4 +52,5 @@ resource "aws_lb_target_group_attachment" "nlb_target_group_attachment_alb" {
   target_group_arn = aws_lb_target_group.nlb_target_group.arn
   target_id        = aws_lb.alb.id
   port             = 80
+  depends_on       = [aws_lb_listener.alb]
 }
