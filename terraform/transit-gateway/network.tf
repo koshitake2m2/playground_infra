@@ -42,7 +42,7 @@ resource "aws_internet_gateway" "vpc_a_igw" {
 // https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eip
 resource "aws_eip" "app_server_a_ip" {
   vpc      = true
-  instance = aws_instance.app_server_a.id
+  instance = module.app_server_a.instance_id
 
   tags = {
     Name = "app_server_a_ip"
