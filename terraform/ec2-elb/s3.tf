@@ -1,3 +1,7 @@
+variable "access_log_bucket_name" {
+  type = string
+}
+
 locals {
   aws-account-id = {
     ap-northeast-1 = "582318560864"
@@ -6,7 +10,7 @@ locals {
 
 // https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket
 resource "aws_s3_bucket" "alb_access_log" {
-  bucket = "koshitake2m2-s3"
+  bucket = var.access_log_bucket_name
 }
 
 // https://docs.aws.amazon.com/elasticloadbalancing/latest/application/enable-access-logging.html
