@@ -30,9 +30,6 @@ ssh -i ./ssh_keys/ssh_key ubuntu@${PUBLIC_IP}
 ```
 
 ### References
-- [Transit Gatewayを利用してVPC間で通信してみた | DevelopersIO](https://dev.classmethod.jp/articles/transit-gateway-vpc/)
 - [AWS Transit Gatewayを構築して分かったこと・ベストプラクティスを紐解く - サーバーワークスエンジニアブログ](https://blog.serverworks.co.jp/transit-gateway-best-practice)
 - [VPC への Transit Gateway アタッチメント - Amazon VPC](https://docs.aws.amazon.com/ja_jp/vpc/latest/tgw/tgw-vpc-attachments.html)
-- VPC間のprivate hosted zoneのドメイン解決
-  - [Amazon Route 53 と AWS Transit Gateway を使用したハイブリッド クラウドの一元的な DNS 管理 |ネットワーキングとコンテンツ配信](https://aws.amazon.com/blogs/networking-and-content-delivery/centralized-dns-management-of-hybrid-cloud-with-amazon-route-53-and-aws-transit-gateway/)
 - [【30分AWSハンズオン(7)】Transit Gatewayを使ってVPC間通信をしてみよう - サーバーワークスエンジニアブログ](https://blog.serverworks.co.jp/30min-handson-tgw)

@@ -1,3 +1,7 @@
+variable "vpc_name" {
+  type = string
+}
+
 variable "subnet_id" {
   type = string
 }
@@ -19,6 +23,6 @@ resource "aws_instance" "app_server" {
   user_data              = file("modules/ec2/setup.sh")
 
   tags = {
-    Name = "app_server__${var.subnet_id}" # fixme
+    Name = "${var.vpc_name}__app_server"
   }
 }
