@@ -28,4 +28,3 @@ resource "aws_iam_policy" "session_manager" {
   name   = "session-manager-policy"
   policy = data.aws_iam_policy.ssm_managerd_instance_core.policy
 }
-

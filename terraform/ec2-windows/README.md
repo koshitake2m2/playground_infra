@@ -1,12 +1,13 @@
 ## EC2 Windows
 
 - リモートデスクトップ接続する
+- Session Managerで接続する
 - ec2
   - windows
 
 ### Test
 
-- 以下の手順でロモーとデスクトップ接続する
+- 以下の手順でリモートデスクトップ接続する
   - インスタンスに接続
   - RDP クライアント
   - Fleet Manager を使用して接続する
