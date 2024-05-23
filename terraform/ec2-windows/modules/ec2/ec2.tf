@@ -14,6 +14,10 @@ output "instance_id" {
   value = aws_instance.app_server.id
 }
 
+output "instance_arn" {
+  value = aws_instance.app_server.arn
+}
+
 resource "aws_instance" "app_server" {
   # Microsoft Windows Server 2022 Base
   ami      = "ami-01a8ef944f58a13cd"
