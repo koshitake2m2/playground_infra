@@ -20,6 +20,7 @@ resource "aws_cloudfront_origin_access_control" "origin_access_control" {
 resource "aws_cloudfront_distribution" "distribution" {
   enabled             = true
   default_root_object = "index.html"
+  web_acl_id          = aws_wafv2_web_acl.web_acl.arn
 
   origin {
     origin_id                = var.origin_id
