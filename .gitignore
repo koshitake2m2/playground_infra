@@ -16,3 +16,7 @@ service.json
 
 **/ssh_keys/*
 !**/ssh_keys/.keep
+
+# other
+.DS_Store
+
