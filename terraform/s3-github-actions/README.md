@@ -18,3 +18,7 @@ curl https://${S3_BUCKET_NAME}.s3.ap-northeast-1.amazonaws.com/index.html
 
 ### 注意点
 - aws s3 sync では `--delete` をつけることで, オブジェクトの削除もできる
+- policyのResourceのs3のarnにslashつけてはいけない
+  - good: `"${var.bucket_arn}",`
+  - bad: `"${var.bucket_arn}/",`
+  - 発生すること: `aws s3 sync` が失敗する

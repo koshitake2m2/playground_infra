@@ -25,9 +25,9 @@ jobs:
           role-session-name: GitHubActionsDeployS3
           aws-region: ${{ env.AWS_REGION }}
       # Upload a file to AWS s3
-      - name: Copy files to s3
-        run: |
-          aws s3 cp ./terraform/s3-github-actions/www s3://${{ secrets.BUCKET_NAME }}/ --recursive
+      # - name: Copy files to s3
+      #   run: |
+      #     aws s3 cp ./terraform/s3-github-actions/www s3://${{ secrets.BUCKET_NAME }}/ --recursive
       - name: Sync files to s3
         run: |
           aws s3 sync --delete ./terraform/s3-github-actions/www s3://${{ secrets.BUCKET_NAME }}/

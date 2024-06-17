@@ -53,7 +53,8 @@ resource "aws_iam_policy" "github_actions_policy" {
           "s3:DeleteObject"
         ]
         Resource = [
-          "${var.bucket_arn}/",
+          # NOTE: slashつけてはいけない
+          "${var.bucket_arn}",
           "${var.bucket_arn}/*",
         ]
       }
