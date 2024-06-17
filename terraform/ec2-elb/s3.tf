@@ -3,7 +3,10 @@ variable "access_log_bucket_name" {
 }
 
 locals {
-  aws-account-id = {
+  // https://docs.aws.amazon.com/ja_jp/elasticloadbalancing/latest/application/enable-access-logging.html
+  // 2022 年 8 月より前に利用可能になったリージョン
+  // アジアパシフィック (東京) — 582318560864
+  elb-account-id = {
     ap-northeast-1 = "582318560864"
   }
 }
@@ -26,7 +29,7 @@ data "aws_iam_policy_document" "alb_access_log" {
     resources = ["arn:aws:s3:::${aws_s3_bucket.alb_access_log.id}/*"]
     principals {
       type        = "AWS"
-      identifiers = [local.aws-account-id.ap-northeast-1]
+      identifiers = [local.elb-account-id.ap-northeast-1]
     }
   }
 }
