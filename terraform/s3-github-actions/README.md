@@ -2,6 +2,7 @@
 
 - htmlをs3に置く
 - github actionsで自動デプロイ
+  - [/.github/workflows/deploy-s3.yml]
 
 ### tips
 
@@ -9,8 +10,8 @@
 S3_BUCKET_NAME=XXX
 
 # アップロード
-aws s3 cp ./www s3://${S3_BUCKET_NAME}/ --recursive
-aws s3 sync ./www "s3://${S3_BUCKET_NAME}" --delete
+aws s3 cp ./www s3://${S3_BUCKET_NAME} --recursive
+aws s3 sync ./www s3://${S3_BUCKET_NAME} --delete
 
 # アクセス
 curl https://${S3_BUCKET_NAME}.s3.ap-northeast-1.amazonaws.com/index.html
