@@ -4,4 +4,5 @@ module "github_actions" {
   repo_owner     = var.repo_owner
   repo_name      = var.repo_name
   bucket_arn     = module.bucket.bucket_arn
+  thumbprint     = var.thumbprint
 }

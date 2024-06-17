@@ -9,6 +9,7 @@
 S3_BUCKET_NAME=XXX
 
 # アップロード
+aws s3 cp ./www s3://${S3_BUCKET_NAME}/ --recursive
 aws s3 sync ./www "s3://${S3_BUCKET_NAME}" --delete
 
 # アクセス

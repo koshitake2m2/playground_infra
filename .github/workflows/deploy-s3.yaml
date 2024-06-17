@@ -7,6 +7,7 @@ name: deploy-s3
 on: workflow_dispatch
 env:
   AWS_REGION: "ap-northeast-1"
+  ROLE_NAME: "github-actions-role"
 # permission can be added at job level or workflow level
 permissions:
   id-token: write # This is required for requesting the JWT
@@ -20,10 +21,13 @@ jobs:
       - name: configure aws credentials
         uses: aws-actions/configure-aws-credentials@v3
         with:
-          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/github-actions-role
+          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/${{ env.ROLE_NAME }}
           role-session-name: GitHubActionsDeployS3
           aws-region: ${{ env.AWS_REGION }}
       # Upload a file to AWS s3
-      - name: Copy index.html to s3
+      - name: Copy files to s3
+        run: |
+          aws s3 cp ./terraform/s3-github-actions/www s3://${{ secrets.BUCKET_NAME }}/ --recursive
+      - name: Sync files to s3
         run: |
           aws s3 sync --delete ./terraform/s3-github-actions/www s3://${{ secrets.BUCKET_NAME }}/

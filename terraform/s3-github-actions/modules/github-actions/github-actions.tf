@@ -10,6 +10,9 @@ variable "repo_name" {
 variable "bucket_arn" {
   type = string
 }
+variable "thumbprint" {
+  type = string
+}
 
 // ref: https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services
 resource "aws_iam_role" "github_acitons_role" {
@@ -56,4 +59,11 @@ resource "aws_iam_policy" "github_actions_policy" {
       }
     ]
   })
+}
+
+// https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_openid_connect_provider
+resource "aws_iam_openid_connect_provider" "oidc" {
+  url             = "https://token.actions.githubusercontent.com"
+  client_id_list  = ["sts.amazonaws.com"]
+  thumbprint_list = [var.thumbprint]
 }
