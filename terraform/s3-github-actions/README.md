@@ -2,7 +2,7 @@
 
 - htmlをs3に置く
 - github actionsで自動デプロイ
-  - (deploy-s3.yml)[/.github/workflows/deploy-s3.yml]
+  - [deploy-s3.yml](/.github/workflows/deploy-s3.yml)
 
 ### tips
 
