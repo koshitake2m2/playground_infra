@@ -15,7 +15,7 @@ cd app
 
 # build
 docker compose build
-docker build -t app_api .
+docker build -t app_api . --platform linux/x86_64
 
 docker compose up -d
 curl -i http://localhost:8080
