@@ -1,13 +1,16 @@
 ## Fargate
 
-- vpc
-- alb
-- ecr
-- fargate
+depends on [ecr](../ecr/README.md)
 
-- todo
-  - ECRにpush github actions
-  - fargateにデプロイ github actions
+- vpc
+- [ ] alb
+- [ ] ecr
+  - [ ] pull through cache
+- [ ] fargate
+- [ ] github actions
+  - push image to ecr
+  - deploy fargate
+
 
 ### Test
 
@@ -15,44 +18,17 @@
 
 ### Tips
 
-#### local express app
-
 ```bash
-cd app
-
-# build
-docker compose build
-docker build -t app_api .
-
-docker compose up -d
-curl -i http://localhost:8080
-docker compose down
-docker image rm app_api
 ```
 
-### ECR
-
-
-```bash
-# confirm image ID
-docker images
-
-# fix .env
-vim .env
-
-# set env
-source .env
-
-# docker login
-aws ecr get-login-password --region $REGION | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${REGION}.amazonaws.com
-
-# tag
-docker tag $DOCKER_IMAGE_ID ${AWS_ACCOUNT_ID}.dkr.ecr.${REGION}.amazonaws.com/${ECR_REPOSITORY}:${ECR_IMAGE_TAG}
-
-# push
-docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${REGION}.amazonaws.com/${ECR_REPOSITORY}:${ECR_IMAGE_TAG}
-```
+### 注意点
+- ECSのタスク定義のplatformとdocker imageのplatformが一致していないとエラーになる
+  - `exec /usr/local/bin/docker-entrypoint.sh: exec format error`
 
 
 ### References
-- [Docker イメージを Amazon ECR プライベートリポジトリにプッシュする - Amazon ECR](https://docs.aws.amazon.com/ja_jp/AmazonECR/latest/userguide/docker-push-ecr-image.html)
+- [TerraformでECS(Fargate)構築｜ECS(Fargate)でnextjs+laravel+rds環境構築](https://zenn.dev/nicopin/books/58c922f51ea349/viewer/77f980)
+- [AWS ECS Fargate ALBを設定する #AWS - Qiita](https://qiita.com/oizumi-yuta/items/532fe4c22bfc790a134c#%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%82%92%E4%BD%9C%E6%88%90%E3%81%99%E3%82%8B)
+- [AWS FargateにExpress.jsをデプロイする手順](https://zenn.dev/program_panda/articles/d6fc8b147d7739)
+- [TerraformでECS on Fargate構築 #AWS - Qiita](https://qiita.com/s_yanada/items/e9c6c096b5df7f6c7bf1)
+- [Fargateをスポットで7割引で使うFargate Spotとは？ #reinvent | DevelopersIO](https://dev.classmethod.jp/articles/fargate-spot-detail/)

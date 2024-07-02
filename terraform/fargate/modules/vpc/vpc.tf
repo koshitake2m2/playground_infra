@@ -10,6 +10,12 @@ output "vpc_id" {
   value = aws_vpc.main.id
 }
 
+output "subnet_ids" {
+  value = [
+    aws_subnet.public_1a.id,
+    aws_subnet.public_1c.id,
+  ]
+}
 
 // https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc
 resource "aws_vpc" "main" {
