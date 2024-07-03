@@ -3,13 +3,10 @@
 depends on [ecr](../ecr/README.md)
 
 - vpc
-- [ ] alb
-- [ ] ecr
-  - [ ] pull through cache
-- [ ] fargate
-- [ ] github actions
-  - push image to ecr
-  - deploy fargate
+- alb
+- ecs fargate
+- github actions
+  - [deploy-fargate.yml](/.github/workflows/deploy-fargate.yml)
 
 
 ### Test
@@ -21,6 +18,18 @@ depends on [ecr](../ecr/README.md)
 
 ```bash
 ```
+
+### TODO
+
+- pull through cache
+  - nodeをdocker hubからpullするのをやめて, ECR publicにあるnodeを利用する
+    - https://gallery.ecr.aws/docker/library/node
+      - public.ecr.aws/docker/library/node:18.20.3-alpine3.20
+  - Dockerfileにuriを指定する必要があり, credentialなIDを含ませないようにしたいのでちょっと面倒
+- workflow or jobを分ける
+  - pushing to ECR
+  - deploying to ECS
+
 
 ### 注意点
 - ECSのタスク定義のplatformとdocker imageのplatformが一致していないとエラーになる
