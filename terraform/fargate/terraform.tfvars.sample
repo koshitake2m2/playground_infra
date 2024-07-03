@@ -1,1 +1,6 @@
 app_api_image_uri = "xxx"
+ecr_repository_name = "xxx"
+aws_account_id = "xxx"
+repo_owner = "xxx"
+repo_name = "xxx"
+thumbprint = "xxx"

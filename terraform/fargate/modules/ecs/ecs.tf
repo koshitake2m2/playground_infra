@@ -14,6 +14,13 @@ variable "alb_target_group_arn" {
   type = string
 }
 
+output "ecs_cluster_name" {
+  value = aws_ecs_cluster.ecs_cluster.name
+}
+output "ecs_service_name" {
+  value = aws_ecs_service.app_api_service.name
+}
+
 // https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecs_cluster
 resource "aws_ecs_cluster" "ecs_cluster" {
   name = "ecs-cluster"

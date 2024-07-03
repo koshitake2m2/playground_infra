@@ -15,6 +15,7 @@ depends on [ecr](../ecr/README.md)
 ### Test
 
 - albのDNS名に対してcurlする
+  - `curl http://alb-XXXXXXXXXX.ap-northeast-1.elb.amazonaws.com/`
 
 ### Tips
 
@@ -32,3 +33,4 @@ depends on [ecr](../ecr/README.md)
 - [AWS FargateにExpress.jsをデプロイする手順](https://zenn.dev/program_panda/articles/d6fc8b147d7739)
 - [TerraformでECS on Fargate構築 #AWS - Qiita](https://qiita.com/s_yanada/items/e9c6c096b5df7f6c7bf1)
 - [Fargateをスポットで7割引で使うFargate Spotとは？ #reinvent | DevelopersIO](https://dev.classmethod.jp/articles/fargate-spot-detail/)
+- [Amazon Elastic Container Serviceへのデプロイ - GitHub Docs](https://docs.github.com/ja/actions/deployment/deploying-to-your-cloud-provider/deploying-to-amazon-elastic-container-service)
