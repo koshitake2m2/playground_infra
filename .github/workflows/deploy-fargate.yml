@@ -61,6 +61,7 @@ jobs:
             --task-definition ${{ env.TASK_DEFINITION_FAMILY }} \
             --query taskDefinition >> $task_definition_json
           echo "task_definition_json=$task_definition_json" >> "$GITHUB_OUTPUT"
+          cat $task_definition_json
 
       - name: Fill in the new image ID in the Amazon ECS task definition
         id: task-def
