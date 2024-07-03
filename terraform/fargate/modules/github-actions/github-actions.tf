@@ -101,7 +101,8 @@ resource "aws_iam_policy" "github_actions_ecs_policy" {
         "Sid" : "RegisterTaskDefinition",
         "Effect" : "Allow",
         "Action" : [
-          "ecs:RegisterTaskDefinition"
+          "ecs:RegisterTaskDefinition",
+          "ecs:DescribeTaskDefinition",
         ],
         "Resource" : "*"
       },
