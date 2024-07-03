@@ -53,6 +53,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v3
+        with:
+          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/${{ env.ROLE_NAME }}
+          role-session-name: GitHubActionsDeployFargate
+          aws-region: ${{ env.AWS_REGION }}
+
       - name: Create task-definition.json
         id: create-task-def
         run: |
