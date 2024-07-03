@@ -4,6 +4,12 @@ variable "vpc_id" {
 variable "subnet_ids" {
   type = list(string)
 }
+variable "public_port" {
+  type = number
+}
+variable "app_api_container_port" {
+  type = number
+}
 output "alb_target_group_arn" {
   value = aws_lb_target_group.alb_target_group.arn
 }
@@ -25,7 +31,7 @@ resource "aws_lb" "alb" {
 // https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_listener
 resource "aws_lb_listener" "alb_listener" {
   load_balancer_arn = aws_lb.alb.arn
-  port              = 8080
+  port              = var.public_port
   protocol          = "HTTP"
   default_action {
     type             = "forward"
@@ -36,7 +42,7 @@ resource "aws_lb_listener" "alb_listener" {
 // https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group
 resource "aws_lb_target_group" "alb_target_group" {
   name        = "albTargetGroup"
-  port        = 8080
+  port        = var.app_api_container_port
   protocol    = "HTTP"
   target_type = "ip"
   vpc_id      = var.vpc_id

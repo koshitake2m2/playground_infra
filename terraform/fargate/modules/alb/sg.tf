@@ -12,8 +12,8 @@ resource "aws_vpc_security_group_ingress_rule" "alb_sg__allow_http" {
   security_group_id = aws_security_group.alb_sg.id
   cidr_ipv4         = "0.0.0.0/0"
   ip_protocol       = "tcp"
-  from_port         = 8080
-  to_port           = 8080
+  from_port         = var.public_port
+  to_port           = var.app_api_container_port
   tags = {
     Name = "alb_sg__allow_http"
   }
