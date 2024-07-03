@@ -45,22 +45,27 @@ jobs:
           docker build -t $image_uri ./terraform/ecr/app --platform linux/amd64
           docker push $image_uri
           echo "image=$image_uri" >> $GITHUB_OUTPUT
+          echo $image_uri # fixme
 
       - name: Create task-definition.json
         id: create-task-def
         run: |
-          task_definition_json=$(mktemp)
           aws ecs describe-task-definition \
             --task-definition ${{ env.TASK_DEFINITION_FAMILY }} \
-            --query taskDefinition >> $task_definition_json
-          echo "task_definition_json=$task_definition_json" >> "$GITHUB_OUTPUT"
-          cat $task_definition_json
+            --query taskDefinition > task_definition.json
+          # task_definition_json=$(mktemp)
+          # aws ecs describe-task-definition \
+          #   --task-definition ${{ env.TASK_DEFINITION_FAMILY }} \
+          #   --query taskDefinition >> $task_definition_json
+          # echo "task_definition_json=$task_definition_json" >> "$GITHUB_OUTPUT"
+          # cat $task_definition_json
 
       - name: Fill in the new image ID in the Amazon ECS task definition
         id: task-def
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
-          task-definition: ${{ steps.create-task-def.outputs.task_definition_json }}
+          # task-definition: ${{ steps.create-task-def.outputs.task_definition_json }}
+          task-definition: "task_definition.json"
           container-name: ${{ env.CONTAINER_NAME }}
           image: ${{ steps.build-image.outputs.image }}
 
