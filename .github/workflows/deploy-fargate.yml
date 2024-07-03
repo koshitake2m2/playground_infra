@@ -1,7 +1,8 @@
 # https://docs.github.com/ja/actions/deployment/deploying-to-your-cloud-provider/deploying-to-amazon-elastic-container-service
 name: deploy-fargate
 
-on: workflow_dispatch
+# on: workflow_dispatch
+on: push # FIXME:
 env:
   AWS_REGION: "ap-northeast-1"
   ROLE_NAME: "github-actions-role"
@@ -17,7 +18,7 @@ permissions:
 
 jobs:
   deploy:
-    name: push-ecr
+    name: deploy
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -61,7 +62,7 @@ jobs:
         with:
           task-definition: ${{ steps.create-task-def.outputs.task_definition_json }}
           container-name: ${{ env.CONTAINER_NAME }}
-          image: ${{ steps.build-iamge.outputs.image }}
+          image: ${{ steps.build-image.outputs.image }}
 
       - name: Deploy Amazon ECS task definition
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
