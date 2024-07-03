@@ -29,6 +29,7 @@ depends on [ecr](../ecr/README.md)
 - workflow or jobを分ける
   - pushing to ECR
   - deploying to ECS
+- ECRにあるimageの自動削除
 
 
 ### 注意点
