@@ -1,6 +1,11 @@
 # Description
 
-- ec2
-- ec2-elb
-- ec2-rds
-- sqs-scheduler
+## Tips
+
+```bash
+# Login AWS.
+zsh ../login_aws.zsh
+
+# Removes junk files.
+./clean.sh
+```

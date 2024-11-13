@@ -6,3 +6,4 @@ for dir in `ls -d */`; do
     rm -rf $path;
 done
 
+rm -rf ./ecr/app/node_modules
