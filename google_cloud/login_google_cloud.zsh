@@ -10,5 +10,4 @@ echo
 source "$(dirname $0)/.env"
 
 
-gcloud auth login
 gcloud auth application-default login

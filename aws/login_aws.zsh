@@ -1,6 +1,6 @@
 #!/bin/zsh
 # サブシェルではなくカレントシェルで実行してください.
-# e.g. source ~/koshitake2m2/playground_infra/login_aws.zsh
+# e.g. source ~/koshitake2m2/playground_infra/aws/login_aws.zsh
 
 # 0. ブラウザの方で該当のロールでIAM Identity Center(SSO)にログインしておく. 
 
