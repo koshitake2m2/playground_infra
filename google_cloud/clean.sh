@@ -1,21 +1,15 @@
 #!/bin/sh
 
-removes=""
+removes="./gar/app/node_modules"
 
-# TODO: Use `find` command.
-for dir in `ls -d */`; do
-    target="${dir}.terraform"
-    removes="$removes\n$target"
+for target in `find . -name "*.terraform"`; do
+    removes="$removes:$target"
 done
 
+for r in `echo $removes | tr ":" "\n"`; do
+    echo "Removing $r"
+    # rm -rf $r; # TODO: Uncomment this line
+done
 
-
-# Removes
-echo $removes
-
-echo "Exit... Unssuccessful..."
+echo "Exit... Unssuccessful... Please fix me..."
 exit 1
-
-for r in $removes; do
-    rm -rf $r;
-done
