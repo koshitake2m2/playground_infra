@@ -15,6 +15,15 @@ docker image rm app_api
 ## Push Image to GAR
 
 ```bash
+# create artifact registry
+terraform apply
+
+# fix .env
+vim .env
+
+# set env
+source .env
+
 # build image
 cd app
 docker build -t app_api . --platform linux/amd64
@@ -22,12 +31,6 @@ cd ..
 
 # confirm image ID
 docker images
-
-# fix .env
-vim .env
-
-# set env
-source .env
 
 # auth, if needed
 gcloud auth configure-docker ${LOCATION}-docker.pkg.dev

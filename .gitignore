@@ -10,6 +10,9 @@ localstack/volume
 terraform.tfvars
 .terraform.lock.hcl
 
+# terragrunt
+.terragrunt-cache
+
 # google cloud
 client_secrets.json
 service.json
