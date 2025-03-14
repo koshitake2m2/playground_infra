@@ -5,6 +5,7 @@
 ```bash
 curl --request POST "http://localhost:3500/forms/chromium/convert/html" \
   --form files=@hello_sample/index.html \
+  --form files=@hello_sample/cat.png \
   -o output/hello.pdf
 ```
 
