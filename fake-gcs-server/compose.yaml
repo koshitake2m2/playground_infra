@@ -1,0 +1,8 @@
+services:
+  fake-gcs-server:
+    image: fsouza/fake-gcs-server:1.52
+    ports:
+      - "4443:4443"
+    volumes:
+      - ./data:/data
+    command: --scheme http --public-host localhost
