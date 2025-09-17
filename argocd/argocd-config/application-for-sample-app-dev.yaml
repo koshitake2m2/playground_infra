@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/koshitake2m2/playground_infra.git
-    targetRevision: HEAD
+    targetRevision: main
     path: argocd/sample-app-config/overlays/dev
   destination:
     server: https://kubernetes.default.svc
