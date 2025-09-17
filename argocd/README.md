@@ -18,7 +18,14 @@ minikube status
 
 # minikubeクラスターを起動（メモリ4GB、CPU2コアで設定）
 minikube start --memory=4096 --cpus=2
+
+# imageアップロード
+
+minikube image load sample-app-api:latest
+minikube image ls | grep sample-app-api
 ```
+
+
 
 ### 2. ArgoCDのインストール
 
@@ -88,6 +95,7 @@ argocd login localhost:8080
 # パスワード: 上記で取得したパスワード
 ```
 
+
 ## サンプルアプリケーションのデプロイ
 
 ### 1. サンプルアプリケーション用のマニフェスト作成
@@ -124,6 +132,8 @@ kubectl apply -f sample-app.yaml
 
 # アプリケーションの状態を確認
 kubectl get applications -n argocd
+kubectl port-forward -n sample-app-dev service/sample-app 18080:18080
+curl 'http://localhost:18080'
 ```
 
 ## トラブルシューティング
@@ -158,6 +168,8 @@ minikube stop
 # minikubeを完全に削除（必要に応じて）
 minikube delete
 ```
+
+
 
 ## 参考リンク
 
