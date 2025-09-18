@@ -80,6 +80,14 @@ kubectl port-forward -n sample-app-dev service/sample-app-service 28080:28080
 curl 'http://localhost:28080'
 ```
 
+## Debug
+
+```bash
+kubectl run -n sample-app-dev netshoot --image=nicolaka/netshoot --restart=Never -it --rm -- bash
+curl 'http://sample-app-service.sample-app-dev.svc.cluster.local:28080'
+curl 'http://helloweb-service.sample-app-dev.svc.cluster.local:38080'
+```
+
 ## Cleanup
 
 ```bash

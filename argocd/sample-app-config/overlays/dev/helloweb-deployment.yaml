@@ -38,4 +38,5 @@ spec:
     protocol: TCP
     name: http
   selector:
-    app: helloweb
+    app: hello
+    tier: web
