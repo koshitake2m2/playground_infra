@@ -74,15 +74,24 @@ minikube image load sample-app-api:latest
 ```bash
 # sample-app-configを修正してpush
 git push
+```
 
-# アプリケーションの状態を確認
+### Test
+
+```bash
+# Access to sample-app-api
 kubectl port-forward -n sample-app-dev service/sample-app-service 28080:28080
 curl 'http://localhost:28080'
+
+# Access to helloweb
+kubectl port-forward -n sample-app-dev service/helloweb-service 38080:38080
+curl 'http://localhost:38080'
 ```
 
 ## Debug
 
 ```bash
+# Access to pods from cluster.
 kubectl run -n sample-app-dev netshoot --image=nicolaka/netshoot --restart=Never -it --rm -- bash
 curl 'http://sample-app-service.sample-app-dev.svc.cluster.local:28080'
 curl 'http://helloweb-service.sample-app-dev.svc.cluster.local:38080'
