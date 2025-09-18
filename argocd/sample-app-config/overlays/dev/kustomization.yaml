@@ -4,7 +4,7 @@ namespace: sample-app-dev
 
 resources:
   - ../../base
+  - helloweb-deployment.yaml
 
 patchesStrategicMerge:
   - deployment-patch.yaml
-  - helloweb-deployment.yaml
