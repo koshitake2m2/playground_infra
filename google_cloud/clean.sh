@@ -16,8 +16,8 @@ done
 
 for r in `echo $removes | tr ":" "\n"`; do
     echo "Removing $r"
-    # rm -rf $r; # TODO: Uncomment this line
+    rm -rf $r;
 done
 
-echo "Exit... Unssuccessful... Please fix me..."
 exit 1
+
